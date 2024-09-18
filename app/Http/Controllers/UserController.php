@@ -11,6 +11,27 @@ class UserController extends Controller
 {
     public function index()
     {
+
+        $user = UserModel::findOr(20, ['username', 'name'], function() {
+            abort(404);
+        });
+
+        return view('user', ['data' => $user]);
+
+        /*$user = UserModel::findOr(1, ['username', 'name'], function() {
+            abort(404);
+        });
+
+        return view('user', ['data' => $user]);*/
+        
+        /*$user = UserModel::firstWhere('level_id', 1);
+        return view('user', ['data' => $user]);*/
+
+        /*$user = UserModel::where('level_id', 1)->first();
+        return view('user', ['data' => $user]);*/
+        
+        /*$user = UserModel::find(1);
+        return view('user', ['data' => $user]);*/
         
         /* $data = [
             'level_id' => 2,
@@ -19,7 +40,7 @@ class UserController extends Controller
             'password' => Hash::make('12345'),
         ]; */
 
-        $data = [
+        /*$data = [
             'level_id' => 2,
             'username' => 'manager_tiga',
             'name' => 'Manager 3',
@@ -28,14 +49,12 @@ class UserController extends Controller
         UserModel::create($data);
 
         $user = UserModel::all();
-        return view('user', ['data' => $user]);
+        return view('user', ['data' => $user]);*/
 
         /*$data = [
         'name' => 'Pelanggan Pertama'
         ];
         UserModel::where('username', 'customer-1')->update($data); // Update data user */
-
-
 
         /* Coba akses model UserModel
         $user = UserModel::all(); // Ambil semua data dari tabel m_user
