@@ -30,10 +30,10 @@ class UserController extends Controller
         $user = UserModel::all();
         return view('user', ['data' => $user]);
 
-        /* $data = [
-            'name' => 'Pelanggan Pertama'
-        ];
-        UserModel::where('username', 'customer-1')->update($data); // Update data user */
+        //$data = [
+            //'name' => 'Pelanggan Pertama'
+        //];
+        //UserModel::where('username', 'customer-1')->update($data); // Update data user */
 
 
 
