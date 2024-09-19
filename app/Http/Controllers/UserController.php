@@ -11,10 +11,21 @@ class UserController extends Controller
 {
     public function index()
     {
+        // JS 4 PRAKTIKUM 2.3
+
+        $userCount = UserModel::where('level_id', 2)->count();
+        //dd($userCount);
+        return view('user', ['userCount' => $userCount]);
+
+        /*$user = UserModel::where('level_id', 2)->count();
+        dd($user);
+        return view('user', ['data' => $user]);*/     
+                
+        
         // JS 4 PRAKTIKUM 2.2
 
-        $user = UserModel::where('username', 'managers9')->firstOrFail();
-        return view('user' , ['data' => $user]);
+        /*$user = UserModel::where('username', 'managers9')->firstOrFail();
+        return view('user' , ['data' => $user]);*/
 
         /*$user = UserModel::findOrFail(1);
         return view('user' , ['data' => $user]);*/
