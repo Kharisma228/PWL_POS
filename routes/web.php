@@ -25,3 +25,14 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
 
 
+// JS 4 - Praktikum 2.6
+
+Route::get('/user/tambah', [UserController::class, 'tambah']);
+
+Route::get('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+
+Route::get('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
