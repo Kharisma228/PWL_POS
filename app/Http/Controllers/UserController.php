@@ -11,11 +11,63 @@ class UserController extends Controller
 {
     public function index()
     {
+
+        // JS 4 PRAKTIKUM 2.4
+        $user = UserModel::firstOrNew(
+            [
+                            'username' => 'manager33',
+                            'name' => 'Manager Tiga Tiga',
+                            'password' => Hash::make('12345'),
+                            'level_id' => 2
+                        ],                        
+                    );
+                    $user->save();
+
+                    return view('user', ['data' => $user]);
+                
+        /*$user = UserModel::firstOrNew(
+            [
+                'username' => 'manager33',
+                'name' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],                        
+        );
+        return view('user', ['data' => $user]);*/
+        
+        /*$user = UserModel::firstOrNew(
+            [
+                'username' => 'manager',
+                'name' => 'Managerr',
+            ],                        
+        );
+        return view('user', ['data' => $user]);*/
+
+        /*$user = UserModel::firstOrCreate(
+            [
+                'username' => 'manager22',
+                'name' => 'Manager Dua Dua',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],                        
+        );
+        return view('user', ['data' => $user]);*/
+
+        /*$user = UserModel::firstOrCreate(
+            [
+                'username' => 'manager',
+                'name' => 'Managerr',
+            ],
+            
+        );
+        return view('user', ['data' => $user]);*/
+
+
         // JS 4 PRAKTIKUM 2.3
 
-        $userCount = UserModel::where('level_id', 2)->count();
+        /*$userCount = UserModel::where('level_id', 2)->count();
         //dd($userCount);
-        return view('user', ['userCount' => $userCount]);
+        return view('user', ['userCount' => $userCount]);*/
 
         /*$user = UserModel::where('level_id', 2)->count();
         dd($user);
@@ -86,4 +138,3 @@ class UserController extends Controller
         return view('user', ['data' => $user]);*/
     }
 }
-

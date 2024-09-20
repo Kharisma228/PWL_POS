@@ -7,10 +7,16 @@
         <h1>Data User</h1>
         <table border="1" cellpadding="2" cellspacing="0">
             <tr>
-                <td>Jumlah Pengguna</td>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Nama</th>
+                <th>ID Level Pengguna</th>
             </tr>
             <tr>
-                <td>{{ $userCount }}</td>
+                <td>{{ $data->user_id}}</td>
+                <td>{{ $data->username}}</td>
+                <td>{{ $data->name}}</td>
+                <td>{{ $data->level_id}}</td>
             </tr>
         </table>
     </body>
