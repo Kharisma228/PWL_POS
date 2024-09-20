@@ -9,12 +9,26 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {   
-     // JS 4 PRAKTIKUM 2.6
-     public function hapus($id) {
+    // JS 4 PRAKTIKUM 2.7 
+    public function index()
+    {     
+           
+        $user = UserModel::with('level')->get();
+        return view('user', ['data' => $user]);
+        
+        /*$user = UserModel::with('level')->get();
+        dd($user);*/
+
+    }
+    
+    
+    
+    // JS 4 PRAKTIKUM 2.6
+     /*public function hapus($id) {
         $user = UserModel::find($id);
         $user->delete();
         return redirect('/user');
-    }
+    }*/
      
      /*public function ubah_simpan($id, Request $request) {
         $user = UserModel::find($id);
