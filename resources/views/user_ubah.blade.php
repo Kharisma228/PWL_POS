@@ -16,7 +16,7 @@
         <input type="text" name="username" placeholder="Masukkan Username" value="{{ $data->username }}">
         <br>
         <label>Nama</label>
-        <input type="text" name="name" placeholder="Masukkan Nama" value="{{ $data->nama }}">
+        <input type="text" name="name" placeholder="Masukkan Nama" value="{{ $data->name }}">
         <br>
         <label>Password</label>
         <input type="password" name="password" placeholder="Masukkan Password" value="{{ $data->password }}">

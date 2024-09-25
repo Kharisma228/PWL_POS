@@ -24,13 +24,13 @@ class UserController extends Controller
     
     
     // JS 4 PRAKTIKUM 2.6
-     /*public function hapus($id) {
+     public function hapus($id) {
         $user = UserModel::find($id);
         $user->delete();
         return redirect('/user');
-    }*/
+    }
      
-     /*public function ubah_simpan($id, Request $request) {
+     public function ubah_simpan($id, Request $request) {
         $user = UserModel::find($id);
         $user->username = $request->username;
         $user->name = $request->name;
@@ -40,14 +40,14 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/user');
-    }*/
+    }
 
-     /*public function ubah($id) {
+     public function ubah($id) {
         $user = UserModel::find($id);
         return view ('user_ubah', ['data' => $user]);
-    }*/
+    }
     
-    /*public function tambah_simpan(Request $request) {
+    public function tambah_simpan(Request $request) {
         UserModel::create ([
             'username' => $request->username,
             'name' => $request->name,
@@ -55,14 +55,14 @@ class UserController extends Controller
             'level_id' => $request->level_id
         ]);
     return redirect('/user');
-    }*/
-
-       /* $user = UserModel::all();
+    } /*public function ubah(){
+        $user = UserModel::all();
         return view('user', ['data' => $user]);
-    }
+    }*/
+       
     public function tambah() {
         return view('user_tambah');
-    }*/
+    }
 
     /*public function index()
     {   
