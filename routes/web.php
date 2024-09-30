@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,3 +43,17 @@ Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 // JS 5 - Praktikum 2
 
 Route::get('/', [WelcomeController::class,'index']);
+
+
+// JS 5 - Praktikum 3
+
+Route::group(['prefix' => 'user'], function(){
+    Route::get('/', [UserController::class, 'index']);              // Menampilkan halaman awal user
+    Route::post('/list', [UserController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk database
+    Route::get('/create', [UserController::class, 'create']);       // Menampilkan halaman form tambah user
+    Route::post('/', [UserController::class, 'store']);             // Menyimpan data user baru
+    Route::get('/{id}', [UserController::class, 'show']);           // Menampilkan detail user
+    Route::get('/{id}/edit', [UserController::class, 'edit']);      // Menampilkan halaman form edit user
+    Route::put('/{id}', [UserController:: class, 'update']);        // Menyimpan perubahan data user
+    Route::delete('/{id}', [UserController::class, 'destroy']);     // Mengahpus data user
+});
