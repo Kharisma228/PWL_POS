@@ -4,15 +4,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Data User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Level Pengguna</label>
                     <select name="level_id" id="level_id" class="form-control" required>
                         <option value="">- Pilih Level -</option>
-                        @foreach ($level as $l)
+                        @foreach($level as $l)
                             <option value="{{ $l->level_id }}">{{ $l->level_nama }}</option>
                         @endforeach
                     </select>
@@ -25,8 +26,8 @@
                 </div>
                 <div class="form-group">
                     <label>Nama</label>
-                    <input value="" type="text" name="nama" id="nama" class="form-control" required>
-                    <small id="error-nama" class="error-text form-text text-danger"></small>
+                    <input value="" type="text" name="name" id="name" class="form-control" required>
+                    <small id="error-name" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -41,6 +42,7 @@
         </div>
     </div>
 </form>
+
 <script>
     $(document).ready(function() {
         $("#form-tambah").validate({
@@ -54,7 +56,7 @@
                     minlength: 3,
                     maxlength: 20
                 },
-                nama: {
+                name: {
                     required: true,
                     minlength: 3,
                     maxlength: 100

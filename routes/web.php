@@ -53,20 +53,24 @@ Route::get('/', [WelcomeController::class,'index']);
 // JS 5 - Praktikum 3
 
 // Data User
-Route::group(['prefix' => 'user'], function(){
-    Route::get('/', [UserController::class, 'index']);              // Menampilkan halaman awal user
-    Route::post('/list', [UserController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk database
-    Route::get('/create', [UserController::class, 'create']);       // Menampilkan halaman form tambah user
-    Route::post('/', [UserController::class, 'store']);             // Menyimpan data user baru
-    Route::get('/create_ajax', [UserController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
-    Route::post('/ajax', [UserController::class, 'store_ajax']);        // Menyimpan data user baru Ajax
-    Route::get('/{id}', [UserController::class, 'show']);           // Menampilkan detail user
-    Route::get('/{id}/edit', [UserController::class, 'edit']);      // Menampilkan halaman form edit user
-    Route::put('/{id}', [UserController:: class, 'update']);        // Menyimpan perubahan data user
-    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']);          // Menampilkan halaman form edit user Ajax
-    Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']);      // Menyimpan perubahan data user ajax
-    Route::delete('/{id}', [UserController::class, 'destroy']);     // Mengahpus data user
-});
+Route::get('/', [WelcomeController::class,'index']);
+
+Route::group(['prefix' => 'user'], function() {
+    Route::get('/', [UserController::class, 'index']); //Menampilkan laman awal user
+    Route::post('/list', [UserController::class, 'list']); //menampilkan data user dalam bentuk json untuk datatables.
+    Route::get('/create', [UserController::class, 'create']); //Membuat data baru
+    Route::post('/', [UserController::class, 'store']); //Menyimpan data yang telah dibuat
+    Route::get('/create_ajax', [UserController::class, 'create_ajax']); //menambah data user dengan ajax
+    Route::post('/ajax', [UserController::class, 'store_ajax']); //menyimpan data yg telah dibuat dengan ajax
+    Route::get('/{id}', [UserController::class, 'show']); //menampilkan detail data user
+    Route::get('/{id}/edit', [UserController::class, 'edit']); //Edit data user tertentu
+    Route::put('/{id}', [UserController::class, 'update']); //Menyimpan perubahan data user 
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); //edit data user dengan ajax
+    Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']); //menyimpan perubahan data dengan ajax
+    Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk menyimpan form confirm delete user ajax
+    Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // untuk hapus data user Ajax
+    Route::delete('/{id}', [UserController::class, 'destroy']); //Menghapus data user
+} );
 
 // JS 5 - Praktikum 4
 
