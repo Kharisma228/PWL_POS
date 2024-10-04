@@ -65,6 +65,7 @@ class SupplierController extends Controller
             'supplier_alamat' => 'required|string|max:255',
         ]);
         SupplierModel::create([
+            
             'supplier_kode' => $request->supplier_kode,
             'supplier_nama' => $request->supplier_nama,
             'supplier_alamat' => $request->supplier_alamat,

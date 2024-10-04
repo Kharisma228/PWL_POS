@@ -6,6 +6,7 @@ use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -190,4 +191,42 @@ class UserController extends Controller
         }
      }
 
+     // Menampilkan halaman form tambah Ajax
+     public function create_ajax()
+     {
+        $level = LevelModel::select('level_id', 'level_nama')->get();
+
+        return view('user.create_ajax')->with('level', $level);
+     }
+
+     // Menyimpan data ajax baru
+     public function store_ajax(Request $request) {
+        // Cek apakah request berupa ajax
+        if($request->ajax() || $request->wantsJson()){
+            $rule = [
+                'level_id' => 'required|integer',
+                'username' => 'required|string|min:3|unique:m_user,username',
+                'name'     => 'required|string|max:100',
+                'password' => 'required|min:6'
+            ];
+        
+        // Use Illuminate\Support\Facades\Validator;
+        $validator = Validator::make($request->all(), $rule);
+        
+        if($validator->fails()){
+            return response()->json([
+                'status'    => false,   // Response status, false: error/gagal, true : berhasil
+                'massage'   => 'validasi Gagal',
+                'msgField'  => $validator->errors(),
+            ]);
+        }
+
+        UserModel::create($request->all());
+        return response()->json([
+            'status'    => true,
+            'massage'   => 'Data user berhasil disimpan'
+        ]);
+        }
+        redirect('/');
+     }
 }

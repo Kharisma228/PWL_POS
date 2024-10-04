@@ -52,11 +52,14 @@ Route::get('/', [WelcomeController::class,'index']);
 
 // JS 5 - Praktikum 3
 
+// Data User
 Route::group(['prefix' => 'user'], function(){
     Route::get('/', [UserController::class, 'index']);              // Menampilkan halaman awal user
     Route::post('/list', [UserController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk database
     Route::get('/create', [UserController::class, 'create']);       // Menampilkan halaman form tambah user
     Route::post('/', [UserController::class, 'store']);             // Menyimpan data user baru
+    Route::get('/create_ajax', [UserController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
+    Route::post('/ajax', [UserController::class, 'store_ajax']);        // Menyimpan data user baru Ajax
     Route::get('/{id}', [UserController::class, 'show']);           // Menampilkan detail user
     Route::get('/{id}/edit', [UserController::class, 'edit']);      // Menampilkan halaman form edit user
     Route::put('/{id}', [UserController:: class, 'update']);        // Menyimpan perubahan data user
@@ -76,6 +79,8 @@ Route::group(['prefix' => 'level'], function(){
     Route::put('/{id}', [LevelController::class, 'update']);      // Menyimpan perubahan data level
     Route::delete('/{id}', [LevelController::class, 'destroy']);      // Menghapus data level
 });
+
+// Kategori Barang
 Route::group(['prefix' => 'kategori'], function(){
     Route::get('/', [KategoriController::class, 'index']);      // Menampilkan halaman awal kategori
     Route::post('/list', [KategoriController::class, 'list']);      // Menampilkan data kategori dalam bentuk jeson untuk datatables
@@ -86,6 +91,8 @@ Route::group(['prefix' => 'kategori'], function(){
     Route::put('/{id}', [KategoriController::class, 'update']);      // Menyimpan perubahan data kategori
     Route::delete('/{id}', [KategoriController::class, 'destroy']);      // Menghapus data kategori
 });
+
+// Data Supplier
 Route::group(['prefix' => 'supplier'], function(){
     Route::get('/', [SupplierController::class, 'index']);      // Menampilkan halaman awal Supplier
     Route::post('/list', [SupplierController::class, 'list']);      // Menampilkan data Supplier dalam bentuk jeson untuk datatables
@@ -96,6 +103,8 @@ Route::group(['prefix' => 'supplier'], function(){
     Route::put('/{id}', [SupplierController::class, 'update']);      // Menyimpan perubahan data Supplier
     Route::delete('/{id}', [SupplierController::class, 'destroy']);      // Menghapus data Supplier
 });
+
+// Data Barang
 Route::group(['prefix' => 'barang'], function(){
     Route::get('/', [BarangController::class, 'index']);      // Menampilkan halaman awal Barang
     Route::post('/list', [BarangController::class, 'list']);      // Menampilkan data Barang dalam bentuk jeson untuk datatables
