@@ -14,6 +14,8 @@ Route::pattern('id','[0-9]+'); // Artinya ketika ada parameter {id}, maka harus 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'store']);
 
 Route::middleware(['auth'])->group(function(){ // Artinya semua route di dalam group ini harus login dulu
     Route::get('/', [WelcomeController::class,'index']);
@@ -63,23 +65,19 @@ Route::middleware(['auth'])->group(function(){ // Artinya semua route di dalam g
 
     // Artinya semua route di dalam group ini harus punya role ADM (Administrator), MNG (Manager) dan STF (Staff)
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function(){
-        Route::group(['prefix' => 'kategori'], function(){
-        Route::get('/kategori', [KategoriController::class, 'index']);      // Menampilkan halaman awal kategori
-        Route::post('/list', [KategoriController::class, 'list']);      // Menampilkan data kategori dalam bentuk jeson untuk datatables
-        Route::get('/create', [KategoriController::class, 'create']);      // Menampilkan halaman form tambah kategori
-        Route::post('/', [KategoriController::class, 'store']);      // Menyimpan data kategori baru
-        Route::get('/create_ajax', [KategoriController::class, 'create_ajax']); // Menampilkan halaman form tambah kategori Ajax
-        Route::post('/ajax', [KategoriController::class, 'store_ajax']);     // Menyimpan data kategori baru Ajax
-        Route::get('/{id}', [KategoriController::class, 'show']);      // Menampilkan detail kategori
-        Route::get('/{id}/edit', [KategoriController::class, 'edit']);      // Menampilkan halaman form edit kategori
-        Route::put('/{id}', [KategoriController::class, 'update']);      // Menyimpan perubahan data kategori
-        Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']); // Menampilkan halaman detail kategori
-        Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']); // Menampilkan halaman form edit kategori Ajax
-        Route::put('/{id}/update_aj ax', [KategoriController::class, 'update_ajax']); // Menyimpan perubahan data kategori Ajax
-        Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']); // Untuk menampilkan form konfirmasi delete kategori Ajax
-        Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']); // Untuk menghapus data kategori  Ajax
-        Route::delete('/{id}', [KategoriController::class, 'destroy']);      // Menghapus data kategori
-    });
+            Route::get('/kategori', [KategoriController::class, 'index']);
+            Route::post('/kategori/list', [KategoriController::class, 'list']);
+            Route::get('/kategori/create', [KategoriController::class, 'create']);
+            Route::post('/kategori', [KategoriController::class, 'store']);
+            Route::get('/kategori/create_ajax', [KategoriController::class, 'create_ajax']);
+            Route::post('/kategori/ajax', [KategoriController::class, 'store_ajax']);
+            Route::get('/kategori/{id}', [KategoriController::class, 'show']);
+            Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit']);
+            Route::put('/kategori/{id}', [KategoriController::class, 'update']);
+            Route::put('/kategori/{id}/update_ajax', [KategoriController::class, 'update_ajax']);
+            Route::get('/kategori/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax']);
+            Route::delete('/kategori/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']);
+            Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
     });
 
     // Artinya semua route di dalam group ini harus punya role ADM (Administrator), MNG (Manager), STF (Staf), GDG (Gudang)
@@ -103,4 +101,3 @@ Route::middleware(['auth'])->group(function(){ // Artinya semua route di dalam g
     });
     });
 });
-
