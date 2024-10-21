@@ -19,7 +19,6 @@ Route::post('register', [AuthController::class, 'store']);
 
 Route::middleware(['auth'])->group(function(){ // Artinya semua route di dalam group ini harus login dulu
     Route::get('/', [WelcomeController::class,'index']);
-    // Route Level
 
     // Artinya semua route di dalam group ini harus punya role ADM (Administrator)
     Route::middleware(['authorize:ADM'])->group(function(){
@@ -61,6 +60,9 @@ Route::middleware(['auth'])->group(function(){ // Artinya semua route di dalam g
         Route::put('/barang/{id}/update_ajax', [BarangController::class, 'update_ajax']);  // Ajax update
         Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);  // Ajax form confirm
         Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);  // Ajax delete
+        Route::get('barang/import', [BarangController::class, 'import']);      // ajax form upload excel
+        Route::post('barang/import_ajax', [BarangController::class, 'import_ajax']);      // ajax import excel
+
     });
 
     // Artinya semua route di dalam group ini harus punya role ADM (Administrator), MNG (Manager) dan STF (Staff)
