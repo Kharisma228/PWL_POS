@@ -3,46 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User as Authenticatable; // Implementasi class Authenticatable
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends Authenticatable
+class UserModel extends Authenticatable implements JWTSubject
 {
+    public function getJWTIdentifier(){
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims(){
+        return [];
+    }
+    
     use HasFactory;
 
-    protected $table = 'm_user';            // mendefinisikan nama tabel yang digunakan oleh model ini
-    protected $primaryKey = 'user_id';    // mendefinisikan primary key dari tabel yang digunakan
+    protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
+    protected $primaryKey = 'user_id'; // Mendifinisikan primary key dari tabel yang digunakan
 
-      protected $fillable = ['level_id', 'username', 'name', 'password', 'avatar', 'created_at', 'updated_at'];
+    protected $fillable = ['username', 'password', 'name', 'level_id', 'avatar', 'created_at', 'updated_at'];
 
-    protected $hidden   = ['password']; // Jangan di tampilkan saat select
-
-    protected $casts    = ['password' => 'hashed']; // Casting password agar otomatis di hash
+    protected $hidden = ['password']; // Tidak ditampilkan saat select
+    protected $casts = ['password' => 'hashed']; // Password akan di-hash secara otomatis
 
     // Relasi ke tabel level
-    public function level(): BelongsTo
+    public function level()
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
-
-    // Mendaptkan nama role
-    public function getRoleName(): string
+    //mendapatkan nama role
+    public function getRoleName()
     {
-      return $this->level->level_nama;
+        return $this->level->level_nama;
+    }
+    //cek apakah user memiliki role tertentu
+    public function hasRole($role): bool
+    {
+        return $this->level->level_kode == $role;
     }
 
-    // Cek apakah user memiliki role tertentu
-    public function hasRole($role) : bool
-    {
-      return $this->level->level_kode == $role;
-    }
-
-    // Mendapat kode role
+    // Mendapatkan kode role
     public function getRole()
     {
-      return $this->level->level_kode;
+        return $this->level->level_kode;
     }
 
-}
 
+}
