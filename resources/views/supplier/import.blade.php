@@ -1,13 +1,15 @@
 @extends('layouts.template')
 @section('content')
+<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
+data-keyboard="false" data-width="75%" aria-hidden="true"></div>
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">Daftar Level</h3>
+            <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <button onclick="modalAction('{{ url('/level/import') }}')" class="btn btn-sm btn-info mt-1">Import Level</button>
-                <a href="{{url('/level/export_excel')}}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Level (Excel)</a>
-                <a href="{{url('/level/export_pdf')}}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Level (PDF)</a>
-                <button onclick="modalAction('{{ url('level/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+                <button onclick="modalAction('{{ url('/supplier/import') }}')" class="btn btn-info">Import Supplier</button>
+            <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Supplier</a>
+            <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Supplier</a>
+            <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-success">Tambah Ajax</button>
             </div>
         </div>
         <div class="card-body">
@@ -17,19 +19,18 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_supplier">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Level</th> <!-- Tambahkan kolom Kode Level -->
-                        <th>Nama</th>
+                        <th>Supplier Kode</th>
+                        <th>Nama Supplier</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 @push('css')
 @endpush
@@ -40,19 +41,15 @@
                 $('#myModal').modal('show');
             });
         }
-
-        var dataLevel;
+        var dataSupplier;
         $(document).ready(function() {
-            var dataUser = $('#table_user').DataTable({
+            dataSupplier = $('#table_supplier').DataTable({
                 // serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('level/list') }}",
+                    "url": "{{ url('supplier/list') }}",
                     "dataType": "json",
-                    "type": "POST",
-                    "data": function (d) {
-                        d.level_id = $('#level_id').val();
-                    }
+                    "type": "POST"
                 },
                 columns: [{
                     // nomor urut dari laravel datatable addIndexColumn()
@@ -61,24 +58,23 @@
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "level_kode", // Tambahkan data untuk Kode Level
+                    data: "supplier_kode",
+                    className: "",
+                    // orderable: true, jika ingin kolom ini bisa diurutkan
+                    orderable: true,
+                    // searchable: true, jika ingin kolom ini bisa dicari
+                    searchable: true
+                }, {
+                    data: "supplier_nama",
                     className: "",
                     orderable: true,
                     searchable: true
-                }, {
-                    data: "level_nama",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
+                },{
                     data: "aksi",
                     className: "",
                     orderable: false,
                     searchable: false
                 }]
-            });
-            $('#level_id').on('change', function() {
-                dataUser.ajax.reload();
             });
         });
     </script>
